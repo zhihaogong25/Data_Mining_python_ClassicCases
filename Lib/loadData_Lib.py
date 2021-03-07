@@ -2,11 +2,16 @@
 """
 Created on Tue Mar  2 16:33:29 2021
 
-@author: P7XX-TM1G
+@author: Zhihao Gong
 """
 
+import pandas as pd
 import numpy as np
 import math 
+
+"""
+Directly load the data file
+"""
 
 def loadDataSet(fileName, delim='\t'):
     fid = open(fileName)
@@ -16,6 +21,23 @@ def loadDataSet(fileName, delim='\t'):
     # list(map()) is used in python 3. 
     dataArr   = [list(map(float, line)) for line in stringArr]
     return np.mat(dataArr)
+
+def loadStrSet(fileName, delim='\t'):
+    fid = open(fileName)
+    stringArr = [line.strip().split(delim) for line in fid.readlines()]
+    return stringArr
+
+
+
+"""
+load csv datafile with DataFrame
+"""
+def loadDataFrame(fileName):
+    dataArr = pd.read_csv(fileName)
+    dataFrm = pd.DataFrame(dataArr)
+    return dataFrm
+
+
 
 def replaceNanWithMean(dataArr):
     numFeat = np.shape(dataArr)[1]
